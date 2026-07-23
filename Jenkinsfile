@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "YOUR_DOCKERHUB_USERNAME/website"
+        IMAGE_NAME = "nitin1501/website"
     }
 
     stages {
