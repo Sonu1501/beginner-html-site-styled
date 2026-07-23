@@ -1,10 +1,9 @@
-
 pipeline {
 
     agent any
 
     environment {
-        IMAGE_NAME = "nitin1501/website"
+        IMAGE_NAME = "YOUR_DOCKERHUB_USERNAME/website"
     }
 
     stages {
@@ -57,8 +56,8 @@ pipeline {
 			steps {
 				sh '''
 				kubectl get nodes
-				kubectl apply -f k8s/deployment.yaml
-				kubectl apply -f k8s/service.yaml
+				kubectl apply -f k8s/website-deployment.yaml
+				kubectl apply -f k8s/website-service.yaml
 				'''
 			}
 		}
