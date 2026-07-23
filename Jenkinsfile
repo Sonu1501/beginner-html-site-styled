@@ -46,16 +46,20 @@ pipeline {
                 docker push ${IMAGE_NAME}:${BUILD_NUMBER}
                 docker push ${IMAGE_NAME}:latest
                 """
-            }
-        }
-
+        
         stage('Deploy to Kubernetes') {
-            steps {
-                sh '''
-                kubectl apply -f k8s/deployment.yaml
-                kubectl apply -f k8s/service.yaml
-                kubectl rollout restart deployment website-deployment
-                '''
+    agent {
+        label 'k8s-agent'
+    }
+
+    steps {
+        sh '''
+        kubectl get nodes
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+        '''
+    }
+}
             }
         }
     }
